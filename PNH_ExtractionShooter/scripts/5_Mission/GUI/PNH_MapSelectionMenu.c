@@ -8,7 +8,7 @@ class PNH_MapSelectionMenu extends UIScriptedMenu
     protected TextWidget m_ATMBalance;
     protected ButtonWidget m_CloseButton;
 
-    protected GridSpacer m_MapGridSpacer;
+    protected GridSpacerWidget m_MapGridSpacer; // CORRIGIDO AQUI
     protected ImageWidget m_MapImage;
     protected TextWidget m_MapTitle;
     protected RichTextWidget m_MapStats;
@@ -26,14 +26,14 @@ class PNH_MapSelectionMenu extends UIScriptedMenu
     override Widget Init()
     {
         // Carrega o layout da UI
-        m_RootWidget = GetGame().GetWorkspace().CreateWidgets("PNH_MapSelectionMenu.layout");
+        m_RootWidget = GetGame().GetWorkspace().CreateWidgets("PNH_ExtractionShooter/GUI/layouts/PNH_MapSelectionMenu.layout");
 
         // Inicializa os widgets
         m_OperatorName = TextWidget.Cast(m_RootWidget.FindAnyWidget("PNH_OperatorName"));
         m_ATMBalance = TextWidget.Cast(m_RootWidget.FindAnyWidget("PNH_ATMBalance"));
         m_CloseButton = ButtonWidget.Cast(m_RootWidget.FindAnyWidget("PNH_CloseButton"));
 
-        m_MapGridSpacer = GridSpacer.Cast(m_RootWidget.FindAnyWidget("PNH_MapGridSpacer"));
+        m_MapGridSpacer = GridSpacerWidget.Cast(m_RootWidget.FindAnyWidget("PNH_MapGridSpacer")); // CORRIGIDO AQUI
         m_MapImage = ImageWidget.Cast(m_RootWidget.FindAnyWidget("PNH_MapImage"));
         m_MapTitle = TextWidget.Cast(m_RootWidget.FindAnyWidget("PNH_MapTitle"));
         m_MapStats = RichTextWidget.Cast(m_RootWidget.FindAnyWidget("PNH_MapStats"));
@@ -91,7 +91,7 @@ class PNH_MapSelectionMenu extends UIScriptedMenu
             ref PNH_MapData mapData = m_MapConfig.maps.Get(i);
 
             // Cria um painel para o item do mapa
-            Widget mapItem = GetGame().GetWorkspace().CreateWidgets("PNH_MapListItem.layout", m_MapGridSpacer); 
+            Widget mapItem = GetGame().GetWorkspace().CreateWidgets("PNH_ExtractionShooter/GUI/layouts/PNH_MapListItem.layout", m_MapGridSpacer); 
             TextWidget mapName = TextWidget.Cast(mapItem.FindAnyWidget("PNH_MapListItemName"));
             ImageWidget mapThumbnail = ImageWidget.Cast(mapItem.FindAnyWidget("PNH_MapListItemThumbnail"));
 
