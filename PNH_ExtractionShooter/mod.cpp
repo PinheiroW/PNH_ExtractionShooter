@@ -1,0 +1,9 @@
+name = "PNH Extraction Shooter";
+picture = ""; // Caminho para uma imagem .edds (opcional)
+logo = "";    // Caminho para um logo .edds (opcional)
+logoOver = "";
+tooltip = "DayZ Tarkov Style - Extraction System";
+overview = "Transforma o DayZ em um Extraction Shooter com HUB, Raids e Persistência customizada.";
+action = "https://seulink.com"; // Link para seu Discord ou site
+author = "Pinheiro";
+version = "0.1";
