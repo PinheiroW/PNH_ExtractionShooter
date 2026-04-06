@@ -1,5 +1,10 @@
 class PNH_AccessCard_NWAF : Paper
 {
-    // A classe agora é apenas um objeto passivo (ItemBase/Paper).
-    // O PNH_InfiltrationManager cuidará de procurar este item no inventário e deletá-lo.
+    override void SetActions()
+    {
+        super.SetActions();
+        
+        // Adiciona a ação de interagir ao segurar o cartão
+        AddAction(PNH_ActionInfiltrateNWAF);
+    }
 }

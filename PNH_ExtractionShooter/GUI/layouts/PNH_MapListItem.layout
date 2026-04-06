@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<layout name="PNH_MapListItem">
-    <Panel pos="0 0 1 1" align="client" background="0.1 0.1 0.1 0.7">
-        <Border color="0.2 0.2 0.2 0.8" size="1"/>
-        <ImageWidget name="PNH_MapListItemThumbnail" pos="0 0 0.3 1" align="left" scaleToContent="1"/>
-        <TextWidget name="PNH_MapListItemName" pos="0.35 0 0.65 1" align="left" valign="center" text="Map Name" font="DayZDefault_Medium" size="18"/>
-    </Panel>
-</layout>
