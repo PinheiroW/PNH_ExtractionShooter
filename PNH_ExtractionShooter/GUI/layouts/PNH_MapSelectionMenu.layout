@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<layout name="PNH_MapSelectionMenu">
+    <PanelWidget name="PNH_RootPanel" pos="0 0 1 1" align="center" valign="center" sizeToContent="0" background="0 0 0 0.9">
+        <BorderWidget name="PNH_Border" color="0.1 0.1 0.1 1" size="2" pos="0 0 1 1"/>
+        
+        <PanelWidget name="PNH_Header" pos="0 0.02 1 0.08" align="top" background="0.2 0.2 0.2 1">
+            <TextWidget name="PNH_OperatorName" pos="0.05 0 0.4 1" align="left" valign="center" text="OPERADOR: ---" font="DayZDefault_Medium" size="22"/>
+            <TextWidget name="PNH_ATMBalance" pos="0.05 0 0.4 1" align="right" valign="center" text="SALDO: ---" font="DayZDefault_Medium" size="22" color="0 1 0 1"/>
+        </PanelWidget>
+
+        <GridSpacerWidget name="PNH_MapGridSpacer" pos="0.05 0.15 0.3 0.75" align="left" content_halign="center" content_valign="top"/>
+
+        <PanelWidget name="PNH_Details" pos="0.4 0.15 0.55 0.75" align="left" background="0.15 0.15 0.15 1">
+            <ImageWidget name="PNH_MapImage" pos="0 0 1 0.5" align="top"/>
+            <TextWidget name="PNH_MapTitle" pos="0 0.55 1 0.08" align="top" text="SELECIONE" font="DayZDefault_Bold" size="30" color="1 1 1 1"/>
+            <RichTextWidget name="PNH_MapDescription" pos="0.05 0.65 0.9 0.2" align="top" font="DayZDefault_Medium" size="18"/>
+            <ButtonWidget name="PNH_ActionButton" pos="0 0.9 1 0.1" align="bottom" text="INGRESSAR" font="DayZDefault_Bold"/>
+        </PanelWidget>
+
+        <ButtonWidget name="PNH_CloseButton" pos="0.02 0.02 0.05 0.05" align="right" text="X" color="1 0 0 1"/>
+    </PanelWidget>
+</layout>

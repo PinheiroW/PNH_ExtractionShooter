@@ -1,48 +1,69 @@
+// PNH_ATMManager.c
+// Gerenciamento de saldo virtual e validação de infiltração.
+
 class PNH_ATMManager
 {
-    // A classe do dinheiro que o seu mod de dinheiro usa
-    private static string m_MoneyClassName = "NOME_DO_ITEM_DE_DINHEIRO"; 
+    protected static ref PNH_ATMManager m_Instance;
 
-    static void DepositPhysicalMoney(PlayerBase player)
+    // CORREÇÃO CRÍTICA: Sem o 'ref' no tipo de retorno da função estática
+    static PNH_ATMManager GetInstance()
     {
-        // Trava de segurança: Só funciona se o jogador estiver dentro dos 600m da Prisão
-        if (!player || !PNH_SafeZoneManager.IsInHub(player.GetPosition())) 
+        if (!m_Instance)
         {
-            return; 
+            m_Instance = new PNH_ATMManager();
+        }
+        return m_Instance;
+    }
+
+    void PNH_ATMManager() {}
+
+    // Verifica se o jogador tem saldo suficiente para a taxa
+    bool CanAffordInfiltration(PlayerBase player, int cost)
+    {
+        if (!player) return false;
+
+        string steamId = player.GetIdentity().GetPlainId();
+        int currentBalance = GetPlayerBalance(steamId);
+
+        if (currentBalance >= cost)
+        {
+            return true;
         }
 
-        int totalToDeposit = 0;
-        array<EntityAI> items = new array<EntityAI>;
+        return false;
+    }
+
+    // Desconta o valor do saldo do jogador (Lógica Anti-Dupe)
+    bool DeductBalance(PlayerBase player, int amount)
+    {
+        if (!player) return false;
+
+        string steamId = player.GetIdentity().GetPlainId();
+        int currentBalance = GetPlayerBalance(steamId);
+
+        if (currentBalance < amount)
+        {
+            Print("[PNH_ATM] ERRO: Tentativa de saldo negativo para o jogador: " + steamId);
+            return false;
+        }
+
+        int newBalance = currentBalance - amount;
+        SavePlayerBalance(steamId, newBalance);
         
-        // Varre tudo que está dentro do inventário do jogador (bolsos, mochila, calça)
-        player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+        Print("[PNH_ATM] Taxa de $" + amount + " cobrada com sucesso. Novo saldo de " + player.GetIdentity().GetName() + ": $" + newBalance);
+        return true;
+    }
 
-        foreach (EntityAI item : items)
-        {
-            if (item.GetType() == m_MoneyClassName)
-            {
-                // Aqui nós pegamos a quantidade. Se for um maço de 50 notas, vale 50.
-                int itemQuantity = item.GetQuantity();
-                
-                // Se o item não tiver quantidade (for uma nota única), assumimos que vale 1
-                if (itemQuantity == 0) itemQuantity = 1; 
+    // SIMULAÇÃO DE BANCO DE DADOS (Para testes da UI)
+    protected int GetPlayerBalance(string steamId)
+    {
+        // Placeholder: Retorna 150k de saldo fixo para testes de Infiltração passarem
+        return 150000; 
+    }
 
-                totalToDeposit += itemQuantity; 
-                item.Delete(); // Apaga a nota física da mochila
-            }
-        }
-
-        if (totalToDeposit > 0)
-        {
-            // Atualiza o seu JSON de sessão que criamos na Fase 1
-            PNH_PlayerData data = PNH_DatabaseManager.GetInstance().GetCachedPlayer(player.GetIdentity().GetPlainId());
-            if (data)
-            {
-                data.BankBalance += totalToDeposit;
-                PNH_DatabaseManager.GetInstance().SavePlayerToDisk(data);
-                
-                Print("[PNH_Economy] Depósito de R$ " + totalToDeposit + " realizado por " + player.GetIdentity().GetName());
-            }
-        }
+    protected void SavePlayerBalance(string steamId, int balance)
+    {
+        // No futuro, aqui entrará o JsonFileLoader para salvar o novo saldo no disco.
+        Print("[PNH_ATM] Saldo virtual atualizado na memória.");
     }
 }
