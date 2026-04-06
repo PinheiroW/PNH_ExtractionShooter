@@ -1,68 +1,26 @@
-```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <layout name="PNH_MapSelectionMenu">
-    <Window pos="0 0 1 1" align="center" valign="center" sizeToContent="0" halign="center" valign="center" background="0 0 0 0.8" blur="10">
-        <!-- Main Window - Dark Glassmorphism Effect -->
-        <Widget name="PNH_RootPanel" pos="0 0 1 1" align="center" valign="center" sizeToContent="0" halign="center" valign="center" background="0 0 0 0.7" blur="10">
+    <Window pos="0 0 1 1" align="center" valign="center" background="0 0 0 0.8" blur="10">
+        <Widget name="PNH_RootPanel" pos="0 0 1 1" align="center" valign="center" background="0 0 0 0.7">
             <Border color="0.1 0.1 0.1 0.8" size="2"/>
             <Padding padding="10"/>
 
-            <!-- Header Panel -->
             <Panel name="PNH_HeaderPanel" pos="0 0 1 0.08" align="top" background="0.1 0.1 0.1 0.9">
-                <Border color="0.2 0.2 0.2 0.8" size="1"/>
-                <Padding padding="5"/>
-
-                <!-- Operator Name -->
-                <TextWidget name="PNH_OperatorName" pos="0.02 0 0.2 1" align="left" valign="center" text="OPERADOR: PINHEIRO" font="DayZDefault_Medium" size="20" color="1 1 1 1"/>
-                
-                <!-- Terminal Title -->
-                <TextWidget name="PNH_TerminalTitle" pos="0.3 0 0.7 1" align="center" valign="center" text="TERMINAL DE OPERAÇÕES" font="DayZDefault_Bold" size="24" color="1 1 1 1"/>
-
-                <!-- ATM Balance -->
-                <TextWidget name="PNH_ATMBalance" pos="0.7 0 0.9 1" align="right" valign="center" text="SALDO ATM: $15,200" font="DayZDefault_Medium" size="20" color="0 1 0 1"/>
-
-                <!-- Close Button -->
-                <ButtonWidget name="PNH_CloseButton" pos="0.95 0 0.05 1" align="right" valign="center" text="X" font="DayZDefault_Bold" size="24" color="1 1 1 1" background="0 0 0 0" hoverColor="1 0 0 0.8"/>
+                <TextWidget name="PNH_OperatorName" pos="0.02 0 0.4 1" align="left" valign="center" text="OPERADOR: ---" font="DayZDefault_Medium" size="20"/>
+                <TextWidget name="PNH_ATMBalance" pos="0.02 0 0.4 1" align="right" valign="center" text="SALDO: ---" font="DayZDefault_Medium" size="20" color="0 1 0 1"/>
             </Panel>
 
-            <!-- Main Content Panel (Horizontal Split) -->
-            <Panel name="PNH_MainContentPanel" pos="0 0.08 1 0.92" align="client" background="0 0 0 0">
-                <HorizontalSplitter>
-                    <!-- Left Panel: Map List -->
-                    <Panel name="PNH_MapListPanel" pos="0 0 0.3 1" align="left" background="0.1 0.1 0.1 0.8" blur="5">
-                        <Border color="0.2 0.2 0.2 0.8" size="1"/>
-                        <Padding padding="5"/>
-                        <ScrollWidget name="PNH_MapScrollWidget" pos="0 0 1 1" align="client" background="0 0 0 0">
-                            <GridSpacer name="PNH_MapGridSpacer" pos="0 0 1 1" align="client" background="0 0 0 0" columns="1" autoHeight="1" cellPadding="5">
-                                <!-- Map Item Template (will be populated dynamically by script) -->
-                                <!-- Each item will be a Panel with ImageWidget and TextWidget -->
-                            </GridSpacer>
-                        </ScrollWidget>
-                    </Panel>
+            <GridSpacerWidget name="PNH_MapGridSpacer" pos="0.02 0.1 0.3 0.8" align="left" content_halign="center"/>
 
-                    <!-- Right Panel: Map Details -->
-                    <Panel name="PNH_MapDetailsPanel" pos="0.3 0 0.7 1" align="client" background="0.1 0.1 0.1 0.8" blur="5">
-                        <Border color="0.2 0.2 0.2 0.8" size="1"/>
-                        <Padding padding="10"/>
-
-                        <!-- Map Image -->
-                        <ImageWidget name="PNH_MapImage" pos="0 0 1 0.5" align="top" image="set:dayz_gui_pnh image:pnh_nwaf_thumbnail" scaleToContent="1"/>
-
-                        <!-- Map Title -->
-                        <TextWidget name="PNH_MapTitle" pos="0 0.5 1 0.08" align="top" text="NWAF" font="DayZDefault_Bold" size="28" color="1 1 1 1"/>
-
-                        <!-- Map Statistics -->
-                        <RichTextWidget name="PNH_MapStats" pos="0 0.58 1 0.2" align="top" text="<p>Jogadores Online: 42/60</p><p>Tempo Restante: 32:15</p><p>Nível de Loot: Alto</p><p>Clima: Nublado</p>" font="DayZDefault_Medium" size="18" color="1 1 1 1"/>
-
-                        <!-- Map Description -->
-                        <RichTextWidget name="PNH_MapDescription" pos="0 0.78 1 0.1" align="top" text="Descrição do mapa aqui..." font="DayZDefault_Light" size="16" color="0.8 0.8 0.8 1"/>
-
-                        <!-- Action Button -->
-                        <ButtonWidget name="PNH_ActionButton" pos="0.2 0.9 0.6 0.08" align="bottom" text="INGRESSAR" font="DayZDefault_Bold" size="28" color="1 1 1 1" background="0 1 0 0.8" hoverColor="0 1 0 1"/>
-                    </Panel>
-                </HorizontalSplitter>
+            <Panel name="PNH_DetailsPanel" pos="0.35 0.1 0.63 0.8" align="left" background="0.1 0.1 0.1 0.8">
+                <ImageWidget name="PNH_MapImage" pos="0 0 1 0.5" align="top" scaleToContent="1"/>
+                <TextWidget name="PNH_MapTitle" pos="0 0.52 1 0.08" align="top" text="SELECIONE UM MAPA" font="DayZDefault_Bold" size="28"/>
+                <RichTextWidget name="PNH_MapStats" pos="0 0.62 1 0.15" align="top" font="DayZDefault_Medium" size="18"/>
+                <RichTextWidget name="PNH_MapDescription" pos="0 0.78 1 0.1" align="top" font="DayZDefault_Light" size="16"/>
+                <ButtonWidget name="PNH_ActionButton" pos="0 0.9 1 0.1" align="bottom" text="INGRESSAR" font="DayZDefault_Bold"/>
             </Panel>
+
+            <ButtonWidget name="PNH_CloseButton" pos="0.95 0.01 0.04 0.04" align="right" text="X" color="1 0 0 1"/>
         </Widget>
     </Window>
 </layout>
-```

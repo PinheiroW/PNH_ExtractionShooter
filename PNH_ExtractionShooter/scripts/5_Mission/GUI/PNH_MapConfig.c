@@ -33,8 +33,7 @@ class PNH_MapConfig
     {
         ref PNH_MapConfig config = new PNH_MapConfig();
         
-        // Proteção: O Cliente é chutado se tentar usar File API em servidores oficiais/modded.
-        // Apenas o Servidor ou modo Offline tem permissão.
+        // Trava para evitar que o Cliente tente ler arquivos locais e seja expulso do servidor
         if (GetGame().IsServer() || !GetGame().IsMultiplayer())
         {
             if (FileExist(configPath))
@@ -44,7 +43,7 @@ class PNH_MapConfig
             }
         }
         
-        // Se a lista estiver vazia (estamos no Cliente), preenchemos com dados fixos para teste.
+        // Dados padrões caso o arquivo não seja encontrado ou estejamos no Cliente
         if (config.maps.Count() == 0)
         {
             config.PopulateDefaults();
