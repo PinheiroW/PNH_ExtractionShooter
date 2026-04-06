@@ -37,6 +37,20 @@ modded class PlayerBase
         // Se o servidor ouvir a frequência 54321 (Botão Ingressar da UI)
         if (GetGame().IsServer() && rpc_type == 54321) 
         {
+            // 1. TRAVA ANTI-SPOOFING (Segurança vital contra cheaters)
+            if (sender == null || sender.GetId() != GetIdentity().GetId())
+            {
+                Print("[PNH_Security] ERRO: Tentativa de spoofing de RPC detectada para o jogador: " + GetIdentity().GetName());
+                return;
+            }
+
+            // 2. TRAVA GEOFENCE SERVER-SIDE (Reaproveitando o seu SafeZoneManager)
+            if (!PNH_SafeZoneManager.IsInHub(this.GetPosition()))
+            {
+                Print("[PNH_Security] ALERTA EXPLOIT: " + sender.GetName() + " enviou RPC de Ingressar fora do HUB!");
+                return;
+            }
+
             Param1<string> raidParam;
             if (!ctx.Read(raidParam)) return;
 
